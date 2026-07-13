@@ -1,0 +1,36 @@
+# ===========================
+# Python
+# ===========================
+
+server/venv/
+server/__pycache__/
+server/**/*.py[cod]
+server/.pytest_cache/
+server/.mypy_cache/
+
+# Environment variables
+server/.env
+
+# ===========================
+# React / Vite
+# ===========================
+
+client/node_modules/
+client/dist/
+
+# Environment variables
+client/.env
+
+# ===========================
+# IDE
+# ===========================
+
+.vscode/
+.idea/
+
+# ===========================
+# OS files
+# ===========================
+
+.DS_Store
+Thumbs.db
