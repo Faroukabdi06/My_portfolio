@@ -33,6 +33,7 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 from app.database.base import Base
 from app.models.project import Project
+from app.models.admin import Admin
 
 target_metadata = Base.metadata
 
