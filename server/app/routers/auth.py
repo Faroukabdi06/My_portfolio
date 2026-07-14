@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 
 from app.database.database import get_db
 from app.models.admin import Admin
-from app.schemas.authentication import AdminCreate, AdminResponse,AdminLogin
-from app.utilis.security import hash_password, verify_password
+from app.schemas.authentication import AdminCreate, AdminResponse,AdminLogin,Token
+from app.utilis.security import hash_password, verify_password,create_access_token
 
 router = APIRouter(prefix="/admin", tags=["Authentication"])
 
@@ -31,7 +31,7 @@ def register_admin(
     return new_admin
 
 
-@router.post("/login", response_model=AdminResponse)
+@router.post("/login", response_model=Token)
 def login_admin(
     admin: AdminLogin,
     db: Session = Depends(get_db)
@@ -42,4 +42,5 @@ def login_admin(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password."
         )
-    return existing_admin
+    access_token = create_access_token(data={"sub": str(existing_admin.id)})
+    return {"access_token": access_token, "token_type": "bearer"}
